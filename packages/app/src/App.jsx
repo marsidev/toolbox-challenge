@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
+const API_BASE_URL = import.meta.env.PROD ? 'https://toolbox-challenge-api.vercel.app/api' : '/api'
+
 function App () {
   const [loading, setLoading] = useState('')
   const [data, setData] = useState('')
 
   const fetchData = async () => {
     setLoading(true)
-    fetch('/api/files/data')
+    fetch(`${API_BASE_URL}/files/data`)
       .then(r => r.json())
       .then(setData)
       .catch(error => console.error(error))

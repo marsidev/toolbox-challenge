@@ -9,9 +9,5 @@ export default defineConfig({
       '/api': 'http://localhost:3001'
     },
     port: 3000
-  },
-  build: {
-    outDir: '../../public',
-    emptyOutDir: false
   }
 })
