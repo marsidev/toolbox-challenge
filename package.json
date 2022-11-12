@@ -2,14 +2,21 @@
 	"name": "toolbox-challenge",
 	"version": "0.0.0",
 	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
 	"scripts": {
-		"api:dev": "pnpm run --filter=api dev",
-		"api:start": "pnpm run --filter=api start",
-		"api:test": "pnpm run --filter=api test",
-		"app:dev": "pnpm run --filter=app dev",
-		"app:start": "pnpm run --filter=app start"
+    "dev": "concurrently \"npm:api:dev\" \"npm:app:dev\" -c auto,cyan",
+    "build": "npm run build --workspace=app",
+    "start": "npm run start --workspace=app",
+		"api:dev": "npm run dev --workspace=api",
+		"api:start": "npm run start --workspace=api",
+		"api:test": "npm run test --workspace=api",
+		"app:dev": "npm run dev --workspace=app",
+		"app:start": "npm run start --workspace=app"
 	},
 	"devDependencies": {
+		"concurrently": "7.5.0",
 		"standard": "17.0.0"
 	},
 	"eslintConfig": {
