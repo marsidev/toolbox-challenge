@@ -1,5 +1,6 @@
 import express from 'express'
 import fetch from 'node-fetch'
+import cors from 'cors'
 import { csvToJson } from './helpers/csv-to-json.js'
 import notFoundHandler from './middlewares/notFound.js'
 const app = express()
@@ -11,6 +12,9 @@ const fetchOptions = {
   },
   method: 'GET'
 }
+
+// Middlewares
+app.use(cors('*'))
 
 // Endpoints
 app.get('/api/files/data', async (_req, res) => {
@@ -47,7 +51,7 @@ app.get('/api/files/data', async (_req, res) => {
   }
 })
 
-// Middlewares
+// Error handlers
 app.use(notFoundHandler)
 
 // Start the server
