@@ -1,4 +1,4 @@
-# Prueba Técnica Toolbox OTT
+# Prueba Técnica Full Stack
 
 ## Diagrama del ejercicio
 
@@ -6,7 +6,9 @@
 
 > [Enunciado](https://cs1.ssltrust.me/s/YeaQjE8XFljaMxv)
 
-> [Demo]()
+> [API desplegada](https://toolbox-challenge-api.vercel.app/api/files/data)
+
+> [Frontend desplegado](https://toolbox-challenge.vercel.app)
 
 ## Herramientas
 
@@ -27,12 +29,14 @@ En el frontend se utilizó:
 - [redux-toolkit](https://redux-toolkit.js.org/) - para el manejo de estados globales
 - [jest](https://jestjs.io/) - para los tests unitarios
 
+> Se desarrolló usando node v16.18.0.
+
 ## Desarrollo en local
 
-1. Clonar o forkear el repositorio
+1. Clonar o [forkear](https://github.com/marsidev/toolbox-challenge/fork) el repositorio
 2. `npm install`
 3. `npm run dev`
 
 > El frontend se ejecuta en el puerto [3000](http://localhost:3000/)
 
-> La API se ejecuta en el puerto [3001](http://localhost:3001/)
+> La API se ejecuta en el puerto [3001](http://localhost:3001/api/files/data)
