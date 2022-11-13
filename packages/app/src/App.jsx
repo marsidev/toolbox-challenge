@@ -37,7 +37,7 @@ function App () {
       <Container as='main' className='max-w-1200'>
         <InputGroup className='mb-3' onChange={event => setQuery(event.target.value)}>
           <InputGroup.Text id='inputGroup-label'>Filter by file name</InputGroup.Text>
-          <Form.Control aria-describedby='inputGroup-label' aria-labeledby='inputGroup-label' />
+          <Form.Control aria-describedby='inputGroup-label' aria-labelledby='inputGroup-label' />
         </InputGroup>
 
         {loading && <span>Loading...</span>}
