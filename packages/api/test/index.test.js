@@ -68,7 +68,7 @@ describe('GET /api/files/data', () => {
   })
 
   it('Can filter by fileName', done => {
-    const filterQuery = 'test3.csv'
+    const filterQuery = 'test9.csv'
     chai
       .request(server)
       .get(`/api/files/data?fileName=${filterQuery}`)
