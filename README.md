@@ -25,7 +25,7 @@ En el backend se utilizó:
 En el frontend se utilizó:
 - [react](https://es.reactjs.org/)
 - [vite](https://vitejs.dev/) - para transpilar y empaquetar el jsx de react
-- [bootstrap](https://getbootstrap.com/) y [react-bootstrap](https://vitejs.dev/) - para estilar
+- [bootstrap](https://getbootstrap.com/) y [react-bootstrap](https://react-bootstrap.github.io/) - para estilar
 - [redux-toolkit](https://redux-toolkit.js.org/) - para el manejo de estados globales
 - [jest](https://jestjs.io/) - para los tests unitarios
 
