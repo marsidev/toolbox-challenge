@@ -13,6 +13,7 @@
 		"api:dev": "npm run dev --workspace=api",
 		"api:start": "npm run start --workspace=api",
 		"api:test": "npm run test --workspace=api",
+		"api:test:watch": "npm run test:watch --workspace=api",
 		"app:dev": "npm run dev --workspace=app",
 		"app:start": "npm run start --workspace=app",
 		"app:test": "npm run test --workspace=app",
