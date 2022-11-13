@@ -28,10 +28,13 @@ app.get('/api/files/data', async (req, res) => {
         // format the csv to json
         const jsonFileData = csvToJson(fileName, fileRawData)
 
-        res.set('Cache-Control', 's-max-age=60')
+        res.set('Cache-Control', 's-max-age=60, max-age=60, public')
         res.status(200).json([jsonFileData])
       } else {
-        res.status(500).json({ error: 'Something went wrong' })
+        const error = JSON.parse(fileRawData)
+        const status = error.status ?? 500
+        const errMessage = error.message ?? 'Something went wrong'
+        res.status(status).json({ error: errMessage })
       }
     } else {
       // fetch all the filenames
@@ -46,9 +49,7 @@ app.get('/api/files/data', async (req, res) => {
 
       const filesContent = []
       filesRawData.forEach((rawData, fileIndex) => {
-        // the raw data can be an stringified json with an error object, we can detect if the string contains the error codes
         if (!rawData.includes('SYS-ERR') && !rawData.includes('API-500')) {
-          // format the csv to json
           const fileName = files[fileIndex]
           const jsonFileData = csvToJson(fileName, rawData)
 
