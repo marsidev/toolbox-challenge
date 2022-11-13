@@ -47,7 +47,7 @@ function App () {
         )}
 
         {!loading && allFileLines?.length > 0 && (
-          <Table striped bordered hover>
+          <Table responsive='sm' striped bordered hover>
             <thead>
               <tr>
                 <th>File Name</th>
