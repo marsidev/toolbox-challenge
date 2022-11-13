@@ -54,3 +54,11 @@ En el frontend se utilizó:
 - `npm run app:start` - igual que `npm run start`
 - `npm run app:test` - ejecuta los tests unitarios de la aplicación de React
 - `npm run app:test:watch` - ejecuta los tests de la aplicación de React, se reinician automáticamente cuando se realizan cambios en los ficheros
+
+## Métricas
+
+![Métricas de pagespeed.web.dev](insights.png)
+
+## Tests
+
+![Captura de pantalla de los tests pasando](tests-passing.png)
