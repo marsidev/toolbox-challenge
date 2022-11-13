@@ -62,3 +62,5 @@ En el frontend se utilizó:
 ## Tests
 
 ![Captura de pantalla de los tests pasando](tests-passing.png)
+
+![Captura de pantalla de los tests pasando en CI](ci.png)
