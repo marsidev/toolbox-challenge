@@ -13,9 +13,6 @@ const fetchOptions = {
   method: 'GET'
 }
 
-// Middlewares
-app.use(cors('*'))
-
 // Endpoints
 app.get('/api/files/data', async (_req, res) => {
   try {
@@ -49,6 +46,12 @@ app.get('/api/files/data', async (_req, res) => {
     console.log(error)
     res.status(500).json({ error: 'Something went wrong' })
   }
+})
+
+// Middlewares
+app.use(cors('*'))
+app.use(function (_req, res) {
+  res.set('Cache-control', 'public, max-age=10')
 })
 
 // Error handlers
