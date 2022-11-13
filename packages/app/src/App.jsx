@@ -1,36 +1,79 @@
-import { useState } from 'react'
-import './App.css'
-
-const API_BASE_URL = import.meta.env.PROD ? 'https://toolbox-challenge-api.vercel.app/api' : '/api'
+import { useEffect, useState, useMemo } from 'react'
+import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar'
+import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
+import { useDebounce } from './hooks/use-debounce'
+import { formatFilesData } from './utils/format-files'
+import { getFilesData } from './services/api'
 
 function App () {
-  const [loading, setLoading] = useState('')
-  const [data, setData] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [filesData, setFilesData] = useState(null)
+  const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query, 500)
 
-  const fetchData = async () => {
+  const allFileLines = useMemo(() => filesData && formatFilesData(filesData), [filesData])
+
+  useEffect(() => {
     setLoading(true)
-    fetch(`${API_BASE_URL}/files/data`)
-      .then(r => r.json())
-      .then(setData)
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false))
-  }
+    getFilesData(debouncedQuery)
+      .then(data => {
+        if (Array.isArray(data)) setFilesData(data)
+        else setFilesData([])
+      })
+      .then(() => setLoading(false))
+  }, [debouncedQuery])
 
   return (
-    <div className='App'>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={fetchData}>
-          Fetch API data
-        </button>
+    <>
+      <Navbar expand='lg' variant='dark' className='bg-gradient my-navbar'>
+        <Container fluid className='max-w-1200'>
+          <Navbar.Brand className='brand-text'>React Test App</Navbar.Brand>
+        </Container>
+      </Navbar>
+
+      <Container as='main' className='max-w-1200'>
+        <InputGroup className='mb-3' onChange={event => setQuery(event.target.value)}>
+          <InputGroup.Text id='inputGroup-sizing-sm'>Filter by file name</InputGroup.Text>
+          <Form.Control aria-describedby='inputGroup-sizing-sm' />
+        </InputGroup>
 
         {loading && <span>Loading...</span>}
 
-        {data && (
-          <code>{JSON.stringify(data)}</code>
+        {!loading && allFileLines?.length === 0 && (
+          <span>No files found.</span>
         )}
-      </div>
-    </div>
+
+        {!loading && allFileLines?.length > 0 && (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Text</th>
+                <th>Number</th>
+                <th>Hex</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {allFileLines.map(file => {
+                return (
+                  <tr key={file.hex}>
+                    <td>{file.file}</td>
+                    <td>{file.text}</td>
+                    <td>{file.number}</td>
+                    <td>{file.hex}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
+        )}
+
+      </Container>
+    </>
   )
 }
 

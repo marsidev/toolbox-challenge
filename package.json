@@ -7,13 +7,16 @@
 	],
 	"scripts": {
     "dev": "concurrently \"npm:api:dev\" \"npm:app:dev\" -c auto,cyan",
+    "test": "concurrently \"npm:api:test\" \"npm:app:test\" -c auto,cyan",
     "build": "npm run build --workspace=app",
     "start": "npm run start --workspace=app",
 		"api:dev": "npm run dev --workspace=api",
 		"api:start": "npm run start --workspace=api",
 		"api:test": "npm run test --workspace=api",
 		"app:dev": "npm run dev --workspace=app",
-		"app:start": "npm run start --workspace=app"
+		"app:start": "npm run start --workspace=app",
+		"app:test": "npm run test --workspace=app",
+		"app:test:watch": "npm run test:watch --workspace=app"
 	},
 	"devDependencies": {
 		"concurrently": "7.5.0",
