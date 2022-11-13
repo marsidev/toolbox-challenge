@@ -66,4 +66,22 @@ describe('GET /api/files/data', () => {
         done()
       })
   })
+
+  it('Can filter by fileName', done => {
+    const filterQuery = 'test3.csv'
+    chai
+      .request(server)
+      .get(`/api/files/data?fileName=${filterQuery}`)
+      .end((err, res) => {
+        const { body: files } = res
+        if (err) done(err)
+
+        res.should.have.status(200)
+        files.should.be.a('array').that.have.lengthOf(1)
+        files[0].should.be.a('object').that.has.all.keys('file', 'lines')
+        files[0].file.should.be.a('string').that.has.string(filterQuery)
+
+        done()
+      })
+  })
 })

@@ -14,7 +14,9 @@ const fetchOptions = {
 }
 
 // Endpoints
-app.get('/api/files/data', async (_req, res) => {
+app.get('/api/files/data', async (req, res) => {
+  const { fileName } = req.query
+
   try {
     // fetch all the filenames
     const filesRes = await fetch(`${API_URL}/secret/files`, fetchOptions)
@@ -26,7 +28,7 @@ app.get('/api/files/data', async (_req, res) => {
     const responses = await Promise.all(promises)
     const filesRawData = await Promise.all(responses.map(r => r.text()))
 
-    const filesContent = []
+    let filesContent = []
     filesRawData.forEach((rawData, fileIndex) => {
       // the raw data can be an stringified json with an error object, we can detect if the string contains the error codes
       if (!rawData.includes('SYS-ERR') && !rawData.includes('API-500')) {
@@ -41,6 +43,10 @@ app.get('/api/files/data', async (_req, res) => {
       }
     })
 
+    if (fileName) {
+      filesContent = filesContent.filter(file => file.file.includes(fileName))
+    }
+
     res.status(200).json(filesContent)
   } catch (error) {
     console.log(error)
@@ -50,8 +56,9 @@ app.get('/api/files/data', async (_req, res) => {
 
 // Middlewares
 app.use(cors('*'))
-app.use(function (_req, res) {
+app.use((_req, res, next) => {
   res.set('Cache-control', 'public, max-age=10')
+  next()
 })
 
 // Error handlers
