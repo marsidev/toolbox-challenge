@@ -4,20 +4,19 @@ on:
   push:
     branches:
       - main
-      - ci
 
   pull_request:
     branches:
       - main
 
 jobs:
-  e2e-test:
+  test:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node: [16.x, 18.x]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
       fail-fast: false
 
     steps:
