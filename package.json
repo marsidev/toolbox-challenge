@@ -27,5 +27,6 @@
 		"extends": [
 			"./node_modules/standard/eslintrc.json"
 		]
-	}
+	},
+  "packageManager": "pnpm@7.14.0"
 }
